@@ -1,0 +1,26 @@
+{
+  "name": "xenostruct-api",
+  "version": "0.1.0",
+  "description": "API for Xenostruct.com",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gillespi3Anthony/xenostruct-api.git"
+  },
+  "author": "Anthony Gillespie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gillespi3Anthony/xenostruct-api/issues"
+  },
+  "homepage": "https://github.com/Gillespi3Anthony/xenostruct-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "path": "^0.12.7"
+  }
+}
