@@ -19,8 +19,10 @@
   "homepage": "https://github.com/Gillespi3Anthony/xenostruct-api#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "discord.io": "^2.5.3",
     "express": "^4.16.2",
     "morgan": "^1.9.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "require": "^2.4.20"
   }
 }

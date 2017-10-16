@@ -2,9 +2,10 @@ var express		= require('express'),
 	app			= express(),
 	bodyParser	= require('body-parser'),
 	morgan		= require('morgan'),
-	path		= require('path');
+	path		= require('path'),
+    Discord     = require('discord.io');
 
-//var config		= require('./config');
+var config		= require('./config');
 
 //app.set("view engine", "vash");
 // set up the app to handle CORS requests and grab POST requests
@@ -25,17 +26,55 @@ app.use(morgan('dev'));
 app.use(express.static(__dirname + '/public'));
 
 // route all requests to the angular index.html file
-var apiRoutes  = require('./node/routes/api')(app, express);
-app.use('/', apiRoutes);
+//var apiRoutes  = require('./node/routes/api')(app, express);
+//app.use('/', apiRoutes);
 
-app.get('*', function (req, res) {
+/*app.get('*', function (req, res) {
 	res.sendFile(path.join(__dirname + '/public/views/index.html'));
-});
+});*/
 
 app.on('error', function (err) {
-	console.log(config.c.red + 'An error occured:' + config.c.reset + err );
+	console.log('An error occured:' + err );
+});
+
+
+
+var bot = new Discord.Client({
+    token : config.apikey,
+    autorun : true
+});
+
+bot.on('ready', function() {
+    console.log('Logged in as %s - %s\n', bot.username, bot.id);
+});
+
+bot.on('disconnect', function(err, code) {
+    console.error('The bot has disconnected (' + code + ') with error: ' + err);
+});
+
+bot.on('presence', function(user, userID, status, game, event) {
+    console.log(user + ' (' + userID + ') - ' + status + ', is playing' + game);
+});
+
+bot.on('message', function(user, userID, channelID, message, event) {
+    console.log('Message received from, ' + user + ' in channel ' + channelID + '.  Message: ' + message);
+
+    if (message === "ping") {
+        bot.sendMessage({
+            to : channelID,
+            message : "pong"
+        });
+    }
+});
+
+bot.on('any', function(event) {
+    if (event.t != null) {
+        console.log('The bot detected activity on event: ' + event.t);
+        console.log(event.d);
+        console.log('\n');
+    }
 });
 
 // Start the server
-app.listen(config.port);
-console.log( config.c.green + 'The xenostruct.com API is listening on port: ' + config.port + "\x1b[31m!\x1b[0m");
+app.listen(config.server.port);
+console.log( 'The xenostruct.com API is listening on port: ' + config.server.port + "\x1b[31m!\x1b[0m");
