@@ -25,20 +25,7 @@ app.use(morgan('dev'));
 // setup the static file directory to make pulling with angular easier
 app.use(express.static(__dirname + '/public'));
 
-// route all requests to the angular index.html file
-//var apiRoutes  = require('./node/routes/api')(app, express);
-//app.use('/', apiRoutes);
-
-/*app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname + '/public/views/index.html'));
-});*/
-
-app.on('error', function (err) {
-	console.log('An error occured:' + err );
-});
-
-
-
+// Discord Bot
 var bot = new Discord.Client({
     token : config.apikey,
     autorun : true
@@ -53,7 +40,20 @@ bot.on('disconnect', function(err, code) {
 });
 
 bot.on('presence', function(user, userID, status, game, event) {
-    console.log(user + ' (' + userID + ') - ' + status + ', is playing' + game);
+    console.log(user + ' (' + userID + ') - ' + status + ', is playing' + game.name);
+
+    if (game && game.name != null) {
+        bot.sendMessage({
+            to : 369262099647692800,
+            message : user + " is currently " + status + " and playing " + game.name + "."
+        });
+    } else {
+        bot.sendMessage({
+            to : 369262099647692800,
+            message : user + " is currently " + status + "."
+        });
+    }
+
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
@@ -74,7 +74,20 @@ bot.on('any', function(event) {
         console.log('\n');
     }
 });
+//END Discord Bot
 
+// route all requests to the angular index.html file
+//var apiRoutes  = require('./node/routes/api')(app, express);
+//app.use('/', apiRoutes);
+
+/*app.get('*', function (req, res) {
+	res.sendFile(path.join(__dirname + '/public/views/index.html'));
+});*/
+
+app.on('error', function (err) {
+	console.log('An error occured:' + err );
+});
 // Start the server
 app.listen(config.server.port);
-console.log( 'The xenostruct.com API is listening on port: ' + config.server.port + "\x1b[31m!\x1b[0m");
+console.log( 'The xenostruct.com API is listening on port: ' +
+              config.server.port + "\x1b[31m!\x1b[0m");
