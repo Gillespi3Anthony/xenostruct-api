@@ -40,24 +40,36 @@ bot.on('disconnect', function(err, code) {
 });
 
 bot.on('presence', function(user, userID, status, game, event) {
-    console.log(user + ' (' + userID + ') - ' + status + ', is playing' + game.name);
-
     if (game && game.name != null) {
+        console.log(user + ' (' + userID + ') is ' + status + ' playing ' + game.name);
+
         bot.sendMessage({
             to : 369262099647692800,
-            message : user + " is currently " + status + " and playing " + game.name + "."
+            message : user + " is now " + status + " playing " + game.name + "."
         });
     } else {
+        console.log(user + ' (' + userID + ') is ' + status + '.');
+
         bot.sendMessage({
             to : 369262099647692800,
-            message : user + " is currently " + status + "."
+            message : user + " is now " + status + "."
         });
     }
 
 });
 
 bot.on('message', function(user, userID, channelID, message, event) {
-    console.log('Message received from, ' + user + ' in channel ' + channelID + '.  Message: ' + message);
+    console.log('Message received from, ' + user + ' (' + userID + ') in channel ' + channelID + '.  Message: ' + message);
+
+    var hello = message.search(/^hello/i);
+    //console.log("Message result: " + hello);
+    function checkZero(int) {
+        if (int < 0) {
+            return 0;
+        } else {
+            return 1;
+        }
+    };
 
     if (message === "ping") {
         bot.sendMessage({
@@ -65,6 +77,15 @@ bot.on('message', function(user, userID, channelID, message, event) {
             message : "pong"
         });
     }
+    else if (checkZero(hello) && userID != "369268526252425227") {
+        bot.sendMessage({
+            to : channelID,
+            message : "Hello, " + user + "."
+        });
+    }
+
+    //console.log(message.search(/hello/i) && userID != "369268526252425227");
+    //console.log(checkZero(hello) && userID != "369268526252425227");
 });
 
 bot.on('any', function(event) {
