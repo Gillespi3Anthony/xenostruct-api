@@ -21,6 +21,7 @@
     "body-parser": "^1.18.2",
     "discord.io": "^2.5.3",
     "express": "^4.16.2",
+    "express-form": "^0.12.6",
     "morgan": "^1.9.0",
     "path": "^0.12.7",
     "require": "^2.4.20"
