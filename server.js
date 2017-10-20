@@ -36,6 +36,11 @@ const bot = new Discord.Client({
 
 bot.on('ready', function() {
     console.log('Logged in as %s - %s\n', bot.username, bot.id);
+    bot.getAccountSettings(function(err, res) {
+        if (!err) {
+
+        }
+    });
 });
 
 bot.on('disconnect', function(err, code) {
@@ -45,11 +50,11 @@ bot.on('disconnect', function(err, code) {
 
 bot.on('presence', function(user, userID, status, game, event) {
     if (game && game.name != null) {
-        console.log(user + ' (' + userID + ') is ' + status + ' playing ' + game.name);
+        console.log(user + ' (' + userID + ') is now playing ' + game.name);
 
         /*bot.sendMessage({
             to : 369262099647692800,
-            message : user + " is now " + status + " playing " + game.name + "."
+            message : user + " is now playing " + game.name + "."
         });*/
     } else {
         console.log(user + ' (' + userID + ') is ' + status + '.');
@@ -65,7 +70,7 @@ bot.on('presence', function(user, userID, status, game, event) {
 bot.on('message', function(user, userID, channelID, message, event) {
     console.log('Message received from, ' + user + ' (' + userID + ') in channel ' + channelID + '.  Message: ' + message);
 
-    var hello = message.search(/^(hey|hello|hi)(,)? (bot|Rusty|Rusty-bot)(\.)?$/i);
+    var hello = message.search(/^(hey|hello|hi)(,)? (bot|Rusty|Rusty-bot)(\.|\!)?$/i);
     //console.log("Message result: " + hello);
     function checkZero(int) {
         if (int < 0) {
@@ -81,15 +86,44 @@ bot.on('message', function(user, userID, channelID, message, event) {
             message : "pong"
         });
     }
+    // The bot says hello back to someone saying Hello Rusty.
     else if (checkZero(hello) && userID != "369268526252425227") {
         bot.sendMessage({
             to : channelID,
             message : "Hello, " + user + "."
         });
     }
+    // When the comment line starts with report in a channel or PM.
+    else if (checkZero(message.search(/^(\!)?report /i)) && userID != "369268526252425227") {
+        var userMessage = message.replace(/^(\!)?report /i, "");
+        console.log("Their message: " + userMessage );
+        bot.sendMessage({
+            to : 369262099647692800,
+            message : `**${user}** is reporting: "${userMessage}"`
+        });
+        bot.sendMessage({
+            to : userID,
+            message : `Thank you, **${user}**. Your report has been submitted.`
+        });
+    }
+    // When the comment line starts with the word help in the
+    // bots own channel.
+    else if (checkZero(message.search(/^(\!)?help(\.|\!)?/i)) && userID != "369268526252425227") {
+        bot.sendMessage({
+            to : userID,
+            message : `Please type the word **report** followed by space and then your comments to submit a report to the server admins and moderators.`
+        });
 
-    //console.log(message.search(/hello/i) && userID != "369268526252425227");
-    //console.log(checkZero(hello) && userID != "369268526252425227");
+    }
+    // Any uncaptured message that goes to the bots channel.
+    else if (channelID == "369368624894443521" && userID != "369268526252425227") {
+        bot.sendMessage({
+            to : 341918947337306114,
+            message : `${user}: ${message}`
+        });
+    } else {
+        // do nothing
+    }
 });
 
 bot.on('any', function(event) {
