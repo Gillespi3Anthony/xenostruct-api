@@ -1,0 +1,81 @@
+* {
+  font-size: 18px;
+  color: white; }
+
+h1 {
+  font-size: 3em;
+  font-variant: small-caps;
+  font-family: 'Roboto', sans-serif;
+  text-shadow: 2px 0px 2px #282828; }
+  h1.blue {
+    color: #35a1cf; }
+
+h2 {
+  font-size: 2.2em; }
+
+h3 {
+  font-size: 1.6em;
+  text-transform: uppercase;
+  font-family: 'Roboto', sans-serif;
+  color: #d03724;
+  text-shadow: 2px 0px 2px #282828; }
+
+section {
+  padding-top: 2em;
+  padding-bottom: 1em; }
+  section.xenoheader, section.xenofooter {
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    background: -webkit-repeating-linear-gradient(45deg, #2f2d29, #2f2d29 10px, #121212 10px, #121212 20px);
+    background: -o-repeating-linear-gradient(45deg, #2f2d29, #2f2d29 10px, #121212 10px, #121212 20px);
+    background: repeating-linear-gradient(45deg, #2f2d29, #2f2d29 10px, #121212 10px, #121212 20px); }
+    section.xenoheader p, section.xenoheader ul, section.xenofooter p, section.xenofooter ul {
+      color: white; }
+  section.xenofooter_old {
+    background-image: url("../images/bg/header_blur_sm.png");
+    background-position: 20% 60%;
+    background-attachment: fixed;
+    background-repeat: no-repeat; }
+  section.xenoadmin {
+    background-image: url("../images/bg/2017-10-03-071613_sm_blur.png");
+    background-position: left;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat; }
+  section.xenomap, section.rules {
+    background-repeat: repeat;
+    background-image: url("../images/bg/rust_black.png");
+    color: white; }
+  section.report {
+    background-image: -webkit-gradient(linear, left top, right top, from(#d0242e), to(#d05424));
+    background-image: -webkit-linear-gradient(left, #d0242e, #d05424);
+    background-image: -o-linear-gradient(left, #d0242e, #d05424);
+    background-image: linear-gradient(90deg, #d0242e, #d05424);
+    min-height: 25em; }
+    section.report h3 {
+      color: #2f2d29; }
+  section img.img-fit {
+    max-width: 100%;
+    padding-bottom: 2em; }
+  section .admin {
+    color: #2bd52d;
+    text-shadow: 1px 0px 1px #282828; }
+  section .moderator {
+    color: #F3C330;
+    text-shadow: 1px 0px 1px #282828; }
+  section .img-pad {
+    padding-bottom: 1em; }
+
+@media screen and (max-width: 768px) {
+  * {
+    font-size: 14px; }
+  ul li {
+    margin-left: -15px; } }
+
+@media screen and (max-width: 364px) {
+  * {
+    font-size: 12px; }
+  ul li {
+    margin-left: -25px; } }

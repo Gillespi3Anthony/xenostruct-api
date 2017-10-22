@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+$red : rgb(208,55,36);
+$blue : rgb(53,161,207);
+$green : rgb(43,213,45);
+$gray : rgb(47,45,41);
+$black : rgb(18,18,18);
+$gold : #F3C330;
+
+* {
+	font-size: 18px;
+	color: white;
+}
+
+//body {
+//	background-repeat: repeat;
+//	background-image: url("../images/bg/rust_black.png");
+//}
+
+h1 {
+	font-size: 3em;
+	font-variant: small-caps;
+	font-family: 'Roboto', sans-serif;
+	text-shadow: 2px 0px 2px rgb(40,40,40);
+
+	&.blue {
+		color: $blue;
+	}
+}
+
+h2 {
+	font-size: 2.2em;
+}
+
+h3 {
+	font-size: 1.6em;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	color: $red;
+	text-shadow: 2px 0px 2px rgb(40,40,40);
+}
+
+section {
+	padding-top: 2em;
+	padding-bottom: 1em;
+
+	&.xenoheader, &.xenofooter
+	 {
+		background-repeat: no-repeat;
+		background-position: center;
+		background-attachment: fixed;
+		background-size: cover;
+		background: repeating-linear-gradient(45deg, $gray, $gray 10px, $black 10px, $black 20px);
+
+		p, ul {
+			color: white;
+		}
+	}
+
+	&.xenofooter_old {
+		background-image: url("../images/bg/header_blur_sm.png");
+		background-position: 20% 60%;
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+
+	}
+
+	&.xenoadmin {
+		background-image: url("../images/bg/2017-10-03-071613_sm_blur.png");
+		background-position: left;
+		background-attachment: fixed;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	&.xenomap, &.rules {
+		background-repeat: repeat;
+		background-image: url("../images/bg/rust_black.png");
+		color: white;
+	}
+
+	&.report {
+		background-image: linear-gradient(90deg, adjust-hue($red, -10deg), adjust-hue($red, 10deg));
+		min-height: 25em;
+
+		& h3 {
+			color: $gray;
+		}
+	}
+
+	img.img-fit {
+		max-width: 100%;
+		padding-bottom: 2em;
+	}
+
+	.admin {
+		color: $green;
+		text-shadow: 1px 0px 1px rgb(40,40,40);
+	}
+
+	.moderator {
+		color: $gold;
+		text-shadow: 1px 0px 1px rgb(40,40,40);
+	}
+
+	.img-pad {
+		padding-bottom: 1em;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	* {
+		font-size: 14px;
+	}
+
+	ul {
+		li {
+			margin-left: -15px;
+		}
+	}
+}
+
+@media screen and (max-width: 364px) {
+	* {
+		font-size: 12px;
+	}
+
+	ul {
+		li {
+			margin-left: -25px;
+		}
+	}
+}

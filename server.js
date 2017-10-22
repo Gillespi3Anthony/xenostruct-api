@@ -4,11 +4,14 @@ var express		= require('express'),
 	morgan		= require('morgan'),
 	path		= require('path'),
     form        = require('express-form'),
-    field       = form.field;
+    field       = form.field,
+	index		= require('serve-index');
+
 
 const Discord   = require('discord.io');
 
 var config		= require('./config');
+config.projectDir = __dirname;
 
 //app.set("view engine", "vash");
 // set up the app to handle CORS requests and grab POST requests
@@ -25,8 +28,11 @@ app.use(function (req,res,next) {
 // log all requests to the console
 app.use(morgan('dev'));
 
-// setup the static file directory to make pulling with angular easier
+// setup the static file directory
 app.use(express.static(__dirname + '/public'));
+app.use('/images',
+	express.static('public/images'),
+	index('public/images', {'icons': true}));
 
 // Discord Bot
 const bot = new Discord.Client({
@@ -79,50 +85,58 @@ bot.on('message', function(user, userID, channelID, message, event) {
             return 1;
         }
     };
+    if (userID != "369268526252425227") {
+        if (message === "ping") {
+            bot.sendMessage({
+                to : channelID,
+                message : "pong"
+            });
+        }
+        // The bot says hello back to someone saying Hello Rusty.
+        else if (checkZero(hello)) {
+            bot.sendMessage({
+                to : channelID,
+                message : "Hello, " + user + "."
+            });
+        }
+        // When the comment line starts with report in a channel or PM.
+        else if (checkZero(message.search(/^(\!)?report /i))) {
+            var userMessage = message.replace(/^(\!)?report /i, "");
+            console.log("Their message: " + userMessage );
+            bot.sendMessage({
+                to : 369262099647692800,
+                message : `**${user}** is reporting: "${userMessage}"`
+            });
+            bot.sendMessage({
+                to : userID,
+                message : `Thank you, **${user}**. Your report has been submitted.`
+            });
+        }
+        // When the comment line starts with the word help in the
+        // bots own channel.
+        else if (checkZero(message.search(/^(\!)?help(\.|\!)?/i))) {
+            bot.sendMessage({
+                to : userID,
+                message : `Please type the word **report** followed by space and then your comments to submit a report to the server admins and moderators.`
+            });
 
-    if (message === "ping") {
-        bot.sendMessage({
-            to : channelID,
-            message : "pong"
-        });
-    }
-    // The bot says hello back to someone saying Hello Rusty.
-    else if (checkZero(hello) && userID != "369268526252425227") {
-        bot.sendMessage({
-            to : channelID,
-            message : "Hello, " + user + "."
-        });
-    }
-    // When the comment line starts with report in a channel or PM.
-    else if (checkZero(message.search(/^(\!)?report /i)) && userID != "369268526252425227") {
-        var userMessage = message.replace(/^(\!)?report /i, "");
-        console.log("Their message: " + userMessage );
-        bot.sendMessage({
-            to : 369262099647692800,
-            message : `**${user}** is reporting: "${userMessage}"`
-        });
-        bot.sendMessage({
-            to : userID,
-            message : `Thank you, **${user}**. Your report has been submitted.`
-        });
-    }
-    // When the comment line starts with the word help in the
-    // bots own channel.
-    else if (checkZero(message.search(/^(\!)?help(\.|\!)?/i)) && userID != "369268526252425227") {
-        bot.sendMessage({
-            to : userID,
-            message : `Please type the word **report** followed by space and then your comments to submit a report to the server admins and moderators.`
-        });
-
-    }
-    // Any uncaptured message that goes to the bots channel.
-    else if (channelID == "369368624894443521" && userID != "369268526252425227") {
-        bot.sendMessage({
-            to : 341918947337306114,
-            message : `${user}: ${message}`
-        });
-    } else {
-        // do nothing
+        }
+        // Respond to the 'fuck you' messages that get sent to the bot
+        else if (checkZero(message.search(/(fuck)( you)? rusty(\.|\!)?$/i))) {
+            bot.sendMessage({
+                to : channelID,
+                message : `You are awesome too, **${user}**.`
+            });
+        }
+        // Any uncaptured message that goes to the bots channel.
+        else if (channelID == "369368624894443521" && userID != "369268526252425227") {
+            bot.sendMessage({
+                to : 341918947337306114,
+                message : `${user}: ${message}`
+            });
+        } else {
+            // do nothing
+        }
     }
 });
 
@@ -136,7 +150,7 @@ bot.on('any', function(event) {
 //END Discord Bot
 
 // route all requests to the angular index.html file
-var apiRoutes  = require('./node/routes/api')(app, express, bot, form);
+var apiRoutes  = require('./node/routes/api')(app, express, bot, form, config);
 app.use('/', apiRoutes);
 
 /*app.get('*', function (req, res) {
