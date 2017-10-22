@@ -55,6 +55,14 @@ section {
 		p, ul {
 			color: white;
 		}
+
+		a {
+			color: $red;
+
+			&:hover {
+				color: adjust-hue($red, -20deg);
+			}
+		}
 	}
 
 	&.xenofooter_old {

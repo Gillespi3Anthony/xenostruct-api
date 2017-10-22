@@ -8,7 +8,6 @@ let express		= require('express')
   , index		= require('serve-index')
   , config		= require('./config');
 
-//const Discord   	= require('discord.io');
 config.projectDir = __dirname;
 
 //app.set("view engine", "vash");
@@ -16,7 +15,7 @@ config.projectDir = __dirname;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function (req,res,next) {
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Origin', 'xenostruct.com');
 	res.setHeader('Access-Control-Allow-Methods', 'GET, POST');
 	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, \
 	              Authorization');
@@ -33,25 +32,16 @@ app.use('/images',
 	index('public/images', {'icons': true}));
 
 // Discord Bot
-/*
-const bot = new Discord.Client({
-	token : config.apikey,
-	autorun : true
-});*/
-
 var bot = require('./node/models/bot.js')(config);
 
 // route all requests to the angular index.html file
 var apiRoutes  = require('./node/routes/api')(app, express, bot, form, config);
 app.use('/', apiRoutes);
 
-/*app.get('*', function (req, res) {
-	res.sendFile(path.join(__dirname + '/public/views/index.html'));
-});*/
-
 app.on('error', function (err) {
 	console.log('An error occured:' + err );
 });
+
 // Start the server
 app.listen(config.server.port);
 console.log( 'The xenostruct.com API is listening on port: ' +

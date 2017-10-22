@@ -33,6 +33,10 @@ section {
     background: repeating-linear-gradient(45deg, #2f2d29, #2f2d29 10px, #121212 10px, #121212 20px); }
     section.xenoheader p, section.xenoheader ul, section.xenofooter p, section.xenofooter ul {
       color: white; }
+    section.xenoheader a, section.xenofooter a {
+      color: #d03724; }
+      section.xenoheader a:hover, section.xenofooter a:hover {
+        color: #d0244a; }
   section.xenofooter_old {
     background-image: url("../images/bg/header_blur_sm.png");
     background-position: 20% 60%;
