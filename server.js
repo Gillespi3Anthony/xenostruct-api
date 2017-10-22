@@ -30,6 +30,9 @@ app.use(express.static(__dirname + '/public'));
 app.use('/images',
 	express.static('public/images'),
 	index('public/images', {'icons': true}));
+app.use('/videos',
+	express.static('public/videos'),
+	index('public/videos', {'icons': true}));
 
 // Discord Bot
 var bot = require('./node/models/bot.js')(config);

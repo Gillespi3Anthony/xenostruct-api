@@ -2,6 +2,9 @@
   font-size: 18px;
   color: white; }
 
+code {
+  white-space: pre; }
+
 h1 {
   font-size: 3em;
   font-variant: small-caps;

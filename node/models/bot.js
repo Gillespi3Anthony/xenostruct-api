@@ -1,4 +1,5 @@
 module.exports = function(config) {
+    const sleep     = require('system-sleep');
     const Discord   = require('discord.io');
     const bot       = new Discord.Client({
     	token : config.apikey,
@@ -41,8 +42,6 @@ module.exports = function(config) {
     bot.on('message', function(user, userID, channelID, message, event) {
         console.log('Message received from, ' + user + ' (' + userID + ') in channel ' + channelID + '.  Message: ' + message);
 
-        var hello = message.search(/^(hey|hello|hi)(,)? (bot|Rusty|Rusty-bot)(\.|\!)?$/i);
-        //console.log("Message result: " + hello);
         function checkZero(int) {
             if (int < 0) {
                 return 0;
@@ -50,6 +49,7 @@ module.exports = function(config) {
                 return 1;
             }
         };
+
         if (userID != "369268526252425227") {
             if (message === "ping") {
                 bot.sendMessage({
@@ -58,10 +58,15 @@ module.exports = function(config) {
                 });
             }
             // The bot says hello back to someone saying Hello Rusty.
-            else if (checkZero(hello)) {
+            else if (checkZero(message.search(/^(hey|hello|hi)(,)? (bot|Rusty|Rusty-bot|<\@369268526252425227>)(\.|\!)?$/i))) {
                 bot.sendMessage({
                     to : channelID,
                     message : "Hello, " + user + "."
+                });
+                sleep(1*1000);
+                bot.sendMessage({
+                    to : userID,
+                    message : `Is there anything I can do to help you today, **${user}**?  If so, please type **help** for a list of commands.`
                 });
             }
             // When the comment line starts with report in a channel or PM.
