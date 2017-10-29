@@ -9,7 +9,6 @@
       <link rel="stylesheet" href="./css/main.css?1022170138" />
       <script src='https://www.google.com/recaptcha/api.js'></script>
       <script src="lib/js/jquery-3.2.1.min.js"></script>
-      <script src="https://embed-cdn.surveyhero.com/popup/user/main.cc7eb31.js" async></script>
    </head>
    <body>
       <section class="xenoheader">
@@ -18,8 +17,8 @@
             <h3>Rust Community Server</h3>
             <p>If you see this page, then the server is online.</p>
             <p style="line-height: 2">
-               <b>PvP: [US East] Noob Friendly, No Wipes, Modded</b><br/>
-               <code>client.connect xenostruct.com:28017</code>
+               <b>PvP: [US East] Noob Friendly, No Wipes, Vanilla</b><br/>
+               <code>client.connect rust.xenostruct.com:28017</code>
             </p>
             <p>
                 <a href="https://discord.gg/xKhZH4n"><img src="./images/logo_discord_menu.svg" height="32px"/></a>
@@ -28,8 +27,8 @@
             </p>
 
             <h3>Add us to your Favorites!</h3>
-            <img class="img-fit" src="./images/rust/favoriteus.png"></img>
-            <p>Haven't completed the October survey?  Click <a href="https://surveyhero.com/e/cc7eb31" onclick="SurveyHero.Popup.open('cc7eb31'); return false;">here</a> to check it out!</p>
+            <img class="img-fit" src="./images/rust/favoriteus.png" />
+            <p>Haven't completed the November map survey?  Click <a href="https://surveyhero.com/c/0d24f6c">here</a> to check it out!</p>
             <p><em>Thank you.</em></p>
          </div>
       </section>
@@ -38,18 +37,27 @@
             <h3>Server Admins</h3>
             <br/>
             <div class="row">
+                <div class="serveradmin col-xs-12 col-sm-6 col-md-6 text-center">
+                   <img src="./images/avatar/skull_avatar_184px.jpg" class="rounded-circle img-pad" width="180px" />
+                   <h5 class="admin">Reggie</h5>
+                </div>
+                <div class="serveradmin col-xs-12 col-sm-6 col-md-6 text-center">
+                   <img src="./images/avatar/cally_184px.png" class="rounded-circle img-pad" width="180px" />
+                   <h5 class="admin">Cally</h5>
+                </div>
+                <!--
                <div class="serveradmin col-xs-12 col-sm-12 col-md-12 text-center">
-                  <img src="./images/avatar/skull_avatar_184px.jpg" class="rounded-circle img-pad" width="180px" />
-                  <h5 class="admin">Reggie</h5>
+                  <img src="./images/avatar/nomad_avatar.jpg" class="rounded-circle img-pad" width="180px" />
+                  <h5 class="admin">NoMaD</h5>
                </div>
                <div class="serveradmin col-xs-12 col-sm-6 col-md-6 text-center">
-                  <img src="./images/avatar/nao_184px.png" class="rounded-circle img-pad" width="180px" />
-                  <h5 class="admin">Nao</h5>
+                  <img src="./images/avatar/brax_avatar.jpg" class="rounded-circle img-pad" width="180px" />
+                  <h5 class="moderator">Brax</h5>
                </div>
                <div class="serveradmin col-xs-12 col-sm-6 col-md-6 text-center">
-                  <img src="./images/avatar/cally_184px.png" class="rounded-circle img-pad" width="180px" />
-                  <h5 class="admin">Cally</h5>
-               </div>
+                  <img src="./images/avatar/jonstark_avatar.jpg" class="rounded-circle img-pad" width="180px" />
+                  <h5 class="moderator">Jonstark</h5>
+              </div>-->
             </div>
         </div><!--
          <br/><br/>
@@ -61,6 +69,7 @@
             </div>
         </div>-->
       </section>
+      @html.block('players')
       <section class="xenomap">
          <div class="container">
             <h3>October's Map</h3>
@@ -235,4 +244,5 @@
             });
       </script>
    </body>
+   })
 </html>

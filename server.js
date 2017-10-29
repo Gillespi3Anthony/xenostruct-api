@@ -10,7 +10,11 @@ let express		= require('express')
 
 config.projectDir = __dirname;
 
-//app.set("view engine", "vash");
+const ExpressConsole = function(message) {
+    console.log('\x1b[38;2;98;153;16mExpress: %s\x1b[0m', message);
+}
+app.set('views', path.join( __dirname, '/public/views') );
+app.set("view engine", "vash");
 // set up the app to handle CORS requests and grab POST requests
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -36,16 +40,18 @@ app.use('/videos',
 
 // Discord Bot
 var bot = require('./node/models/bot.js')(config);
+// Rust Rcon connection
+var rcon = require('./node/models/rcon.js')(config);
 
 // route all requests to the angular index.html file
-var apiRoutes  = require('./node/routes/api')(app, express, bot, form, config);
+var apiRoutes  = require('./node/routes/api')(app, express, bot, form, rcon, config);
 app.use('/', apiRoutes);
 
 app.on('error', function (err) {
-	console.log('An error occured:' + err );
+	ExpressConsole('ERROR:' + err );
 });
 
 // Start the server
 app.listen(config.server.port);
-console.log( 'The xenostruct.com API is listening on port: ' +
+ExpressConsole( 'The xenostruct.com API is listening on port: ' +
               config.server.port + "\x1b[31m!\x1b[0m");

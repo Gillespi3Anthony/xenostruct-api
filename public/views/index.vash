@@ -1,0 +1,33 @@
+@html.extend('layout', function(model) {
+    @html.block('players', function(model) {
+        @if(model.players.length > 0) {
+        <section class="xenomap">
+            <div class='container'>
+                var num = 1;
+                <h3>Players Online: @model.players.length</h3>
+                <table class='table'>
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Player Name</th>
+                            <th scope="col">Connected Seconds</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @model.players.forEach(function(player) {
+                        <tr>
+                            <th scope="row">@num</th>
+                            <td><a href='http://steamcommunity.com/profiles/@player.SteamID'>@player.DisplayName</a></td>
+                            <td>@player.ConnectedSeconds</td>
+                        </tr>
+                        @{ num = num + 1 }
+                    })
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        } else {
+
+        }
+    })
+})

@@ -1,16 +1,29 @@
-module.exports = function(app, express, bot, form, config) {
+module.exports = function(app, express, bot, form, rcon, config) {
     var apiRouter = express.Router();
     var request   = require('request');
     //const util = require('util')
 
-    app.use(express.static(__dirname + '/public'));
+    //app.use(express.static(__dirname + '/public'));
 
     apiRouter.get('/', function(req, res) {
         /*res.json({
             title : "Xenostruct API " + config.version,
             message : "No API informaton at this time."
         });*/
-        res.sendFile('/');
+        //res.sendFile('/');
+        console.log('/players');
+        try {
+            rcon.GetPlayers(function(response) {
+                res.render('index', {
+                    players : response
+                });
+            });
+        } catch(e) {
+            console.log('API ERROR: %s', e);
+            res.render('index', {
+                players : {}
+            });
+        }
     });
 
     apiRouter.post('/',
@@ -70,18 +83,34 @@ module.exports = function(app, express, bot, form, config) {
         });
 
     apiRouter.get('/complaint', function (req, res) {
-            bot.sendMessage({
-                to : 369262099647692800,
-                message : "Test message from visiting the API."
-            });
+        /*bot.sendMessage({
+            to : 369262099647692800,
+            message : "Test message from visiting the API."
+        });*/
 
+        res.json({
+            title : "Xenostruct API " + config.version,
+            message : "You have reached the player reporting API path."
+        });
+    });
+
+    apiRouter.get('/players', function (req, res) {
+        console.log('/players');
+        try {
+            rcon.GetPlayers(function(response) {
+                res.json({
+                    title : "Xenostruct API " + config.version,
+                    count : response.length,
+                    message : response
+                });
+            });
+        } catch (e) {
             res.json({
                 title : "Xenostruct API " + config.version,
-                message : "You have reached the player reporting API path."
+                message : e
             });
-        });
-
-
+        }
+    });
 
     return apiRouter;
 }
