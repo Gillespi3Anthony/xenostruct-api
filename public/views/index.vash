@@ -10,7 +10,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Player Name</th>
-                            <th scope="col">Connected Seconds</th>
+                            <th scope="col">Connected Time</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -18,12 +18,13 @@
                         <tr>
                             <th scope="row">@num</th>
                             <td><a href='http://steamcommunity.com/profiles/@player.SteamID'>@player.DisplayName</a></td>
-                            <td>@player.ConnectedSeconds</td>
+                            <td>@player.RelativeTime</td>
                         </tr>
                         @{ num = num + 1 }
                     })
                     </tbody>
                 </table>
+                <i style="font-size: 0.6em;">The player list is not dynamic, please refresh the page to update the data.</i>
             </div>
         </section>
         } else {

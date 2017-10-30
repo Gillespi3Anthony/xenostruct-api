@@ -22,7 +22,7 @@ module.exports = function(config) {
             this.Request('playerlist', function(msg) {
                 if (msg) {
                     var playerlist = fromJson(msg.message);
-                    RustRcon.PlayerList = playerlist;
+                    RustRcon.PlayerList = RustRcon.AddRelativeTime(playerlist);
                     if (playerlist) {
                         if (typeof cb === 'function' && cb) {
                             RconConsole('The playerlist was retrieved via callback.');
@@ -40,6 +40,17 @@ module.exports = function(config) {
                 }
             });
         },
+        AddRelativeTime : function(json) {
+            var newJson = [];
+            for (var key in json) {
+                if (json.hasOwnProperty(key)) {
+                    if (json[key].ConnectedSeconds) {
+                        json[key].RelativeTime = getTimeOnline(json[key].ConnectedSeconds);
+                        //console.log(`ConSec: ${json[key].ConnectedSeconds}, RelSec: ${json[key].RelativeSeconds}`);
+                    }
+                }
+            }
+        }
     }
 
     const RconConsole = function(message) {
@@ -55,6 +66,54 @@ module.exports = function(config) {
             return 0;
         } else {
             return 1;
+        }
+    }
+
+    const getPlurality = function(value, singular, plural) {
+        if (value > 1 || value === 0) {
+            return value + " " + plural;
+        } else {
+            return value + " " + singular;
+        }
+    }
+
+    const getTimeOnline = function(seconds) {
+        var minutes   = 0
+          , hours     = 0
+          , days      = 0
+          , secstring = ""
+          , minstring = ""
+          , hrstring  = ""
+          , daystring = "";
+
+        if (seconds > 60) {
+
+            var sec = seconds % 60;
+            minutes = (seconds - sec) / 60;
+            seconds = sec;
+            secstring = seconds + " sec";
+            minstring = minutes + " min, ";
+
+            if (minutes > 59) {
+                var min = minutes % 60;
+                hours = (minutes - min) / 60;
+                minutes = min;
+                secstring = "";
+                minstring = minutes + " min";
+                hrstring = getPlurality(hours, "hr, ", "hrs, ");
+
+                if (hours > 24) {
+                    var hr = hours % 24;
+                    days = (hours - hr) / 24;
+                    hours = hr;
+                    hrstring = getPlurality(hours, "hr, ", "hrs, ");
+                    daystring = getPlurality(days, "day, ", "days, ");
+                }
+            }
+
+        return (daystring + hrstring + minstring + secstring);
+        } else {
+            return seconds + " sec";
         }
     }
 
