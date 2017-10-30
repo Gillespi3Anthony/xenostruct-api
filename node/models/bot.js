@@ -103,7 +103,7 @@ module.exports = function(config) {
                 var response = [
                     `Did your mom teach you those manners, **${user}**?`,
                     `You are awesome too, **${user}**.  Maybe.`,
-                    `Tis a sad site watching someone curse at a bot, **${user}**`,
+                    `Tis a sad site watching someone curse at a bot, **${user}**.`,
                     `You talkin' to me, **${user}**?`
                 ];
                 var rand = Math.floor((Math.random() * response.length));

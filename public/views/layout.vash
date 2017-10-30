@@ -14,7 +14,7 @@
       <section class="xenoheader">
          <div class="container">
             <h1>XenoStruct</h1>
-            <h3>Rust Community Server</h3>
+            <h3 id="top">Rust Community Server</h3>
             <p>If you see this page, then the server is online.</p>
             <p style="line-height: 2">
                <b>PvP: [US East] Noob Friendly, No Wipes, Vanilla</b><br/>
@@ -34,7 +34,7 @@
       </section>
       <section class="xenoadmin">
          <div class="container">
-            <h3>Server Admins</h3>
+            <h3 id="admins">Server Admins</h3>
             <br/>
             <div class="row">
                 <div class="serveradmin col-xs-12 col-sm-6 col-md-6 text-center">
@@ -78,7 +78,7 @@
       </section>
       <section class="report">
           <div class="container">
-              <h3>Having an issue?</h3>
+              <h3 id="report">Having an issue?</h3>
               <form class="form-horizontal" name="reportForm" action="/" method="POST">
                   <div class="form-group col-xs-12 col-md-8 mr-md-auto">
                       <label class="control-label">
@@ -244,5 +244,4 @@
             });
       </script>
    </body>
-   })
 </html>
