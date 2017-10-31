@@ -12,25 +12,25 @@
    </head>
    <body>
       <section class="xenoheader">
-         <div class="container">
-            <h1>XenoStruct</h1>
-            <h3 id="top">Rust Community Server</h3>
-            <p>If you see this page, then the server is online.</p>
-            <p style="line-height: 2">
-               <b>PvP: [US East] Noob Friendly, No Wipes, Vanilla</b><br/>
-               <code>client.connect rust.xenostruct.com:28017</code>
-            </p>
-            <p>
-                <a href="https://discord.gg/xKhZH4n"><img src="./images/logo_discord_menu.svg" height="32px"/></a>
-                <br/>
-                <!--<iframe src="https://discordapp.com/widget?id=356574196244938752&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>-->
-            </p>
+        <div class="container">
+             <h1>XenoStruct</h1>
+             <h3 id="top">Rust Community Server</h3>
+             <p>The server is currently <i class='@model.status'>@model.status</i>.</p>
+             <p style="line-height: 2">
+                <b>PvP: [US East] Noob Friendly, No Wipes, Vanilla</b><br/>
+                <code>client.connect rust.xenostruct.com:28017</code>
+             </p>
+             <p>
+                 <a href="https://discord.gg/xKhZH4n"><img src="./images/logo_discord_menu.svg" height="32px"/></a>
+                 <br/>
+                 <!--<iframe src="https://discordapp.com/widget?id=356574196244938752&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0"></iframe>-->
+             </p>
 
-            <h3>Add us to your Favorites!</h3>
-            <img class="img-fit" src="./images/rust/favoriteus.png" />
-            <p>Haven't completed the November map survey?  Click <a href="https://surveyhero.com/c/0d24f6c">here</a> to check it out!</p>
-            <p><em>Thank you.</em></p>
-         </div>
+             <h3>Add us to your Favorites!</h3>
+             <img class="img-fit" src="./images/rust/favoriteus.png" />
+             <p>Haven't completed the November map survey?  Click <a href="https://surveyhero.com/c/0d24f6c">here</a> to check it out!</p>
+             <p><em>Thank you.</em></p>
+        </div>
       </section>
       <section class="xenoadmin">
          <div class="container">

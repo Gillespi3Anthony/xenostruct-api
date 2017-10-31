@@ -8,6 +8,7 @@ module.exports = function(config) {
     var RustRcon = {
         _this : this,
         IndexVar : 1000,
+        Status : 'offline',
         PlayerList : {},
         Callbacks : {},
         Request : function(cmd, callback) {
@@ -138,6 +139,7 @@ module.exports = function(config) {
     rcon.on('connect', function() {
       RconConsole('Connected to the server.');
       RustRcon.GetPlayers();
+      RustRcon.Status = 'online';
     });
 
     rcon.on('disconnect', function() {
@@ -145,6 +147,7 @@ module.exports = function(config) {
       RustRcon.IndexVar = 1000;
       RustRcon.Callbacks = {};
       RustRcon.PlayerList = {};
+      RustRcon.Status = 'offline';
       sleep(1*5000);
       rcon.connect(config.rcon.password);
     });

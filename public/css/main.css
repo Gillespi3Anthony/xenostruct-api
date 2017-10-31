@@ -72,6 +72,18 @@ section {
   section .moderator {
     color: #F3C330;
     text-shadow: 1px 0px 1px #282828; }
+  section .online {
+    text-transform: uppercase;
+    color: #2bd52d;
+    font-style: normal;
+    font-weight: bold;
+    text-shadow: 2px 0px 2px #282828; }
+  section .offline {
+    text-transform: uppercase;
+    color: #d03724;
+    font-style: normal;
+    font-weight: bold;
+    text-shadow: 2px 0px 2px #282828; }
   section .img-pad {
     padding-bottom: 1em; }
 

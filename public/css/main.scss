@@ -115,6 +115,22 @@ section {
 		text-shadow: 1px 0px 1px rgb(40,40,40);
 	}
 
+	.online {
+		text-transform: uppercase;
+		color: $green;
+		font-style: normal;
+		font-weight: bold;
+		text-shadow: 2px 0px 2px rgb(40,40,40);
+	}
+
+	.offline {
+		text-transform: uppercase;
+		color: $red;
+		font-style: normal;
+		font-weight: bold;
+		text-shadow: 2px 0px 2px rgb(40,40,40);
+	}
+
 	.img-pad {
 		padding-bottom: 1em;
 	}

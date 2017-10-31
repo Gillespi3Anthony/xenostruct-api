@@ -15,12 +15,14 @@ module.exports = function(app, express, bot, form, rcon, config) {
         try {
             rcon.GetPlayers(function(response) {
                 res.render('index', {
+                    status  : rcon.Status,
                     players : response
                 });
             });
         } catch(e) {
             console.log('API ERROR: %s', e);
             res.render('index', {
+                status  : rcon.Status,
                 players : {}
             });
         }
@@ -95,7 +97,6 @@ module.exports = function(app, express, bot, form, rcon, config) {
     });
 
     apiRouter.get('/players', function (req, res) {
-        console.log('/players');
         try {
             rcon.GetPlayers(function(response) {
                 res.json({
