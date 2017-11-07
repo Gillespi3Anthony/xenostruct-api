@@ -13,12 +13,12 @@ module.exports = function(app, express, bot, form, rcon, config) {
         //res.sendFile('/');
         console.log('/players');
         try {
-            rcon.GetPlayers(function(response) {
+            //rcon.GetPlayers(function(response) {
                 res.render('index', {
                     status  : rcon.Status,
                     players : response
                 });
-            });
+            //});
         } catch(e) {
             console.log('API ERROR: %s', e);
             res.render('index', {
