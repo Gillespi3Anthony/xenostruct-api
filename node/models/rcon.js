@@ -28,9 +28,10 @@ module.exports = function(config) {
                         if (typeof cb === 'function' && cb) {
                             RconConsole('The playerlist was retrieved via callback.');
                             cb(playerlist);
+                        } else {
+                            RconConsole('The playerlist was retrieved via return value.');
+                            return playerlist;
                         }
-                        RconConsole('The playerlist was retrieved via return value.');
-                        return playerlist;
                     } else {
                         RconConsole('The playerlist retrieval failed.');
                         return {};
